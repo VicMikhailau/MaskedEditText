@@ -9,6 +9,18 @@ import com.vicmikhailau.maskededittext.MaskedWatcher;
 
 public class MainActivity extends AppCompatActivity {
 
+    /**
+     * Use specific values for create your own mask (see example below or in xml):
+     * ANYTHING_KEY = '*'
+     * DIGIT_KEY = '#'
+     * UPPERCASE_KEY = 'U';
+     * LOWERCASE_KEY = 'L';
+     * ALPHA_NUMERIC_KEY = 'A';
+     * LITERAL_KEY = '\'';
+     * CHARACTER_KEY = '?';
+     * HEX_KEY = 'H';
+     */
+
     // ===========================================================
     // Constants
     // ===========================================================
@@ -18,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     // ===========================================================
 
     private MaskedEditText mEdtMaskedCustom;
+    private MaskedEditText mEdtMaskedCustomSample;
 
     private EditText mEdtMasked;
 
@@ -52,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void findViews() {
         mEdtMaskedCustom = (MaskedEditText) findViewById(R.id.edt_masked_custom);
+        mEdtMaskedCustomSample = (MaskedEditText) findViewById(R.id.edt_masked_custom_sample);
+
         mEdtMasked = (EditText) findViewById(R.id.edt_masked);
     }
 
@@ -59,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
      * You cas use MaskedEditText declared in xml with attribute named mask
      * or
      * set mask in code for default EdiText
+     *
      * @param mask your mask
      */
     private void setMask(String mask) {
