@@ -7,7 +7,7 @@ It allows you to add a mask to EditText
 
 # Version
 
-1.0.0
+1.1.0
 
 # Installation
 
@@ -15,7 +15,7 @@ To use this library in your android project, just simply add the following depen
 
 ```sh
 dependencies {
-    compile 'com.vicmikhailau:MaskedEditText:1.0.0'
+    compile 'com.vicmikhailau:MaskedEditText:1.1.0'
 }
 ```
 
@@ -47,6 +47,28 @@ mEditText.addTextChangedListener(new MaskedWatcher("your_mask"));
     HEX KEY = H;
 
 For example: you would like create a mask for a mobile number in format **(029)777-77-77**. Just use the simple mask **"(###)###-##-##"**.
+
+**If you want to get text without mask just use following code:**
+ - For getting unmasked text for **MaskedEditText mEdtMaskedCustom** just use
+ 
+    ```
+    mEdtMaskedCustom.getUnMaskedString().
+    ```
+ - For getting unmasked text for default EditText with **MaskedWatcher mMaskedWatcher** just use
+ 
+    ```
+    mMaskedWatcher.getUnMaskedString().
+    ```
+
+# Change Logs
+
+### v1.1.0
+
+Added ability to get unmasked text (text without mask)
+
+### v1.0.0
+
+Initial version
 
 ## Licence
 Copyright 2016 Vic Mikhailau<br />
