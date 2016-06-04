@@ -17,6 +17,8 @@ public class MaskedFormatter {
     private static final char CHARACTER_KEY = '?';
     private static final char HEX_KEY = 'H';
 
+    private static final String EMPTY_STRING = "";
+
     private static final MaskCharacter[] EMPTY_MASK_CHARS = new MaskCharacter[0];
 
     // ===========================================================
@@ -29,6 +31,7 @@ public class MaskedFormatter {
     private String mValidCharacters;
     private String mInvalidCharacters;
     private String mPlaceholderString;
+    private String mUnMaskedString;
     private char mPlaceholder;
 
     // ===========================================================
@@ -90,6 +93,10 @@ public class MaskedFormatter {
         mPlaceholder = placeholder;
     }
 
+    public String getUnMaskedString() {
+        return mUnMaskedString;
+    }
+
     // ===========================================================
     // Methods for/from SuperClass
     // ===========================================================
@@ -103,6 +110,7 @@ public class MaskedFormatter {
     // ===========================================================
 
     public String valueToString(Object value) {
+        mUnMaskedString = EMPTY_STRING;
         String stringValue = (value == null) ? "" : value.toString();
         StringBuffer result = new StringBuffer();
         String placeholder = getPlaceholder();
@@ -206,6 +214,7 @@ public class MaskedFormatter {
                 return false;
             }
 
+            mUnMaskedString = mUnMaskedString.concat(String.valueOf(character));
             return true;
         }
 

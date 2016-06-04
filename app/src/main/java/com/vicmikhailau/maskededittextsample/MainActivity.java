@@ -21,6 +21,11 @@ public class MainActivity extends AppCompatActivity {
      * HEX_KEY = 'H';
      */
 
+    /**
+     * For getting unmasked text for MaskedEditText mEdtMaskedCustom just use mEdtMaskedCustom.getUnMaskedString().
+     * For getting unmasked text for default EditText with MaskedWatcher mMaskedWatcher just use mMaskedWatcher.getUnMaskedString().
+     */
+
     // ===========================================================
     // Constants
     // ===========================================================

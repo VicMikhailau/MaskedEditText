@@ -36,6 +36,9 @@ public class MaskedWatcher implements TextWatcher {
         mMaskFormatter.setMask(mask);
     }
 
+    public String getUnMaskedString() {
+        return mMaskFormatter.getUnMaskedString();
+    }
 
     // ===========================================================
     // Methods for/from SuperClass

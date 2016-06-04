@@ -59,6 +59,9 @@ public class MaskedEditText extends EditText {
         addTextChangedListener(mMaskedWatcher);
     }
 
+    public String getUnMaskedString() {
+        return mMaskedWatcher != null ? mMaskedWatcher.getUnMaskedString() : getText().toString();
+    }
 
     // ===========================================================
     // Methods for/from SuperClass
