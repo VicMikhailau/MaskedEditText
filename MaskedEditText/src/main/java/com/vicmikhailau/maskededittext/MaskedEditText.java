@@ -2,10 +2,10 @@ package com.vicmikhailau.maskededittext;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.v7.widget.AppCompatEditText;
 import android.util.AttributeSet;
-import android.widget.EditText;
 
-public class MaskedEditText extends EditText {
+public class MaskedEditText extends AppCompatEditText {
 
     // ===========================================================
     // Constants
