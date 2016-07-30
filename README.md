@@ -7,7 +7,7 @@ It allows you to add a mask to EditText
 
 # Version
 
-1.1.0
+1.1.1
 
 # Installation
 
@@ -15,7 +15,7 @@ To use this library in your android project, just simply add the following depen
 
 ```sh
 dependencies {
-    compile 'com.vicmikhailau:MaskedEditText:1.1.0'
+    compile 'com.vicmikhailau:MaskedEditText:1.1.1'
 }
 ```
 
@@ -62,9 +62,13 @@ For example: you would like create a mask for a mobile number in format **(029)7
 
 # Change Logs
 
+### v1.1.1
+
+Superclass for MaskedEditText was changed to AppCompatEditText, which supports compatible features on older version of the platform
+
 ### v1.1.0
 
-Added ability to get unmasked text (text without mask)
+Ability to get unmasked text (text without mask) was added
 
 ### v1.0.0
 
