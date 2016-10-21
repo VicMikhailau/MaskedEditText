@@ -7,7 +7,7 @@ It allows you to add a mask to EditText
 
 # Version
 
-1.1.1
+1.1.2
 
 # Installation
 
@@ -61,6 +61,10 @@ For example: you would like create a mask for a mobile number in format **(029)7
     ```
 
 # Change Logs
+
+### v1.1.2
+
+Fixed crash for getting unmasked text
 
 ### v1.1.1
 
