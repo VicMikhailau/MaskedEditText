@@ -19,6 +19,7 @@
         android:layout_marginBottom="30dp"
         android:hint="@string/edt_masked_custom_mobile_hint"
         android:textColor="@android:color/black"
+        android:inputType="phone"
         app:mask="(###)###-##-##" />
 
     <EditText
@@ -27,6 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
         android:hint="@string/edt_masked_date_hint"
+        android:inputType="date"
         android:textColor="@android:color/black" />
 
     <com.vicmikhailau.maskededittext.MaskedEditText
@@ -35,6 +37,8 @@
         android:layout_height="wrap_content"
         android:hint="@string/edt_masked_custom_sample_hint"
         android:textColor="@android:color/black"
+        android:inputType="number"
+        android:digits="0,1,2,3,4,5,6,7,8,9,."
         app:mask="##.##.##" />
 
 </LinearLayout>

@@ -60,7 +60,9 @@ public class MaskedEditText extends AppCompatEditText {
     }
 
     public String getUnMaskedString() {
-        return mMaskedWatcher != null ? mMaskedWatcher.getUnMaskedString() : getText().toString();
+        return mMaskedWatcher != null
+                ? (mMaskedWatcher.getUnMaskedString() == null ? getText().toString() : mMaskedWatcher.getUnMaskedString())
+                : getText().toString();
     }
 
     // ===========================================================
