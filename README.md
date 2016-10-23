@@ -15,7 +15,7 @@ To use this library in your android project, just simply add the following depen
 
 ```sh
 dependencies {
-    compile 'com.vicmikhailau:MaskedEditText:1.1.1'
+    compile 'com.vicmikhailau:MaskedEditText:1.1.2'
 }
 ```
 
