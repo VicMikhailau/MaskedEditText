@@ -32,6 +32,7 @@ public class MaskedFormatter {
     private String mInvalidCharacters;
     private String mPlaceholderString;
     private String mUnMaskedString;
+    private String mLiterals;
     private char mPlaceholder;
 
     // ===========================================================
@@ -59,6 +60,7 @@ public class MaskedFormatter {
     public void setMask(String mask) {
         mMask = mask;
         updateInternalMask();
+        mLiterals = getNotKeyLiterals();
     }
 
     public String getValidCharacters() {
@@ -112,11 +114,34 @@ public class MaskedFormatter {
     public String valueToString(Object value) {
         mUnMaskedString = EMPTY_STRING;
         String stringValue = (value == null) ? "" : value.toString();
+
+        stringValue = removeLiterals(stringValue);
+
         StringBuffer result = new StringBuffer();
         String placeholder = getPlaceholder();
         int[] valueCounter = {0};
 
         append(result, stringValue, valueCounter, placeholder, mMaskChars);
+        return result.toString();
+    }
+
+    private String getNotKeyLiterals() {
+        StringBuilder result = new StringBuilder();
+        for (MaskCharacter ch : mMaskChars){
+            if (ch.isLiteral()){
+                result.append(ch.getChar('0'));
+            }
+        }
+        return result.toString();
+    }
+
+    private String removeLiterals(String value) {
+        StringBuilder result = new StringBuilder();
+        for (char ch : value.toCharArray()) {
+            if (mLiterals.indexOf(ch) == -1) {
+                result.append(ch);
+            }
+        }
         return result.toString();
     }
 
