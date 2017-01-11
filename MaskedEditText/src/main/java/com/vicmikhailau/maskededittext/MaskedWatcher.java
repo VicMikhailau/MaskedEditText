@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 
 public class MaskedWatcher implements TextWatcher {
+    private String oldInput;
 
     // ===========================================================
     // Constants
@@ -52,6 +53,10 @@ public class MaskedWatcher implements TextWatcher {
     public void afterTextChanged(Editable s) {
         String filtered = mMaskFormatter.valueToString(s);
 
+        if (s.length() > filtered.length() && s.length() > oldInput.length()) {
+            filtered = mMaskFormatter.valueToString(oldInput);
+        }
+
         if (!TextUtils.equals(s, filtered)) {
             s.replace(0, s.length(), filtered);
         }
@@ -59,6 +64,7 @@ public class MaskedWatcher implements TextWatcher {
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        this.oldInput = s.toString();
     }
 
     @Override
