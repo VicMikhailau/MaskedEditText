@@ -3,26 +3,27 @@ package com.vicmikhailau.maskededittext;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.widget.EditText;
+
+import java.lang.ref.WeakReference;
 
 public class MaskedWatcher implements TextWatcher {
-    private String oldInput;
-
-    // ===========================================================
-    // Constants
-    // ===========================================================
-
     // ===========================================================
     // Fields
     // ===========================================================
 
     private MaskedFormatter mMaskFormatter;
+    private final WeakReference<EditText> mEditText;
+    private String oldFormattedValue = "";
+    private int oldCursorPosition;
 
     // ===========================================================
     // Constructors
     // ===========================================================
 
-    public MaskedWatcher(String mask) {
+    public MaskedWatcher(String mask, EditText editText) {
         mMaskFormatter = new MaskedFormatter(mask);
+        mEditText = new WeakReference<>(editText);
     }
 
     // ===========================================================
@@ -37,45 +38,46 @@ public class MaskedWatcher implements TextWatcher {
         mMaskFormatter.setMask(mask);
     }
 
-    public String getUnMaskedString() {
-        return mMaskFormatter.getUnMaskedString();
-    }
-
-    // ===========================================================
-    // Methods for/from SuperClass
-    // ===========================================================
-
     // ===========================================================
     // Listeners, methods for/from Interfaces
     // ===========================================================
 
     @Override
     public void afterTextChanged(Editable s) {
-        String filtered = mMaskFormatter.valueToString(s);
 
-        if (s.length() > filtered.length() && s.length() > oldInput.length()) {
-            filtered = mMaskFormatter.valueToString(oldInput);
+        if (s == null)
+            return;
+
+        String value =  s.toString();
+
+        if (value.length() > oldFormattedValue.length() &&  mMaskFormatter.getMaskLength() < value.length()) {
+            value = oldFormattedValue;
         }
 
-        if (!TextUtils.equals(s, filtered)) {
-            s.replace(0, s.length(), filtered);
+        IFormattedString formattedString = mMaskFormatter.formatString(value);
+
+        if (!TextUtils.equals(s, formattedString)) {
+            s.replace(0, s.length(), formattedString);
         }
+
+        int currentPosition =  mEditText.get().getSelectionStart();
+        if (oldCursorPosition - currentPosition > 0) {
+            int newPosition;
+            if (oldFormattedValue.length() - formattedString.length() > 1)
+                newPosition = Math.max(0, Math.min(formattedString.length(), oldCursorPosition));
+            else
+                newPosition = Math.max(0, Math.min(formattedString.length(), currentPosition));
+            mEditText.get().setSelection(newPosition);
+        }
+        oldFormattedValue = formattedString.toString();
     }
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        this.oldInput = s.toString();
+        this.oldCursorPosition = mEditText.get().getSelectionStart();
     }
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
     }
-
-    // ===========================================================
-    // Methods
-    // ===========================================================
-
-    // ===========================================================
-    // Inner and Anonymous Classes
-    // ===========================================================
 }

@@ -8,10 +8,6 @@ import android.util.AttributeSet;
 public class MaskedEditText extends AppCompatEditText {
 
     // ===========================================================
-    // Constants
-    // ===========================================================
-
-    // ===========================================================
     // Fields
     // ===========================================================
 
@@ -32,7 +28,7 @@ public class MaskedEditText extends AppCompatEditText {
             mMask = typedArray.getString(R.styleable.MaskedEditText_mask);
 
             if (mMask != null && !mMask.isEmpty()) {
-                mMaskedWatcher = new MaskedWatcher(mMask);
+                mMaskedWatcher = new MaskedWatcher(mMask, this);
                 addTextChangedListener(mMaskedWatcher);
             }
         }
@@ -55,29 +51,8 @@ public class MaskedEditText extends AppCompatEditText {
             removeTextChangedListener(mMaskedWatcher);
         }
 
-        mMaskedWatcher = new MaskedWatcher(this.mMask);
+        mMaskedWatcher = new MaskedWatcher(this.mMask, this);
         addTextChangedListener(mMaskedWatcher);
     }
 
-    public String getUnMaskedString() {
-        return mMaskedWatcher != null
-                ? (mMaskedWatcher.getUnMaskedString() == null ? getText().toString() : mMaskedWatcher.getUnMaskedString())
-                : getText().toString();
-    }
-
-    // ===========================================================
-    // Methods for/from SuperClass
-    // ===========================================================
-
-    // ===========================================================
-    // Listeners, methods for/from Interfaces
-    // ===========================================================
-
-    // ===========================================================
-    // Methods
-    // ===========================================================
-
-    // ===========================================================
-    // Inner and Anonymous Classes
-    // ===========================================================
 }

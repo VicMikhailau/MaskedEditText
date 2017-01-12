@@ -34,9 +34,6 @@ public class MainActivity extends AppCompatActivity {
     // Fields
     // ===========================================================
 
-    private MaskedEditText mEdtMaskedCustom;
-    private MaskedEditText mEdtMaskedCustomSample;
-
     private EditText mEdtMasked;
 
     // ===========================================================
@@ -69,9 +66,6 @@ public class MainActivity extends AppCompatActivity {
     // ===========================================================
 
     private void findViews() {
-        mEdtMaskedCustom = (MaskedEditText) findViewById(R.id.edt_masked_custom);
-        mEdtMaskedCustomSample = (MaskedEditText) findViewById(R.id.edt_masked_custom_sample);
-
         mEdtMasked = (EditText) findViewById(R.id.edt_masked);
     }
 
@@ -83,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
      * @param mask your mask
      */
     private void setMask(String mask) {
-        mEdtMasked.addTextChangedListener(new MaskedWatcher(mask));
+        mEdtMasked.addTextChangedListener(new MaskedWatcher(mask, mEdtMasked));
     }
 
     // ===========================================================
