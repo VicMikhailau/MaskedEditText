@@ -2,9 +2,13 @@ package com.vicmikhailau.maskededittextsample;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.vicmikhailau.maskededittext.MaskedEditText;
+import com.vicmikhailau.maskededittext.MaskedFormatter;
 import com.vicmikhailau.maskededittext.MaskedWatcher;
 
 public class MainActivity extends AppCompatActivity {
@@ -77,7 +81,10 @@ public class MainActivity extends AppCompatActivity {
      * @param mask your mask
      */
     private void setMask(String mask) {
-        mEdtMasked.addTextChangedListener(new MaskedWatcher(mask, mEdtMasked));
+        MaskedFormatter formatter = new MaskedFormatter(mask);
+        mEdtMasked.addTextChangedListener(new MaskedWatcher(formatter, mEdtMasked));
+        // Example how to get unmasked string in this case.
+        String s = formatter.formatString(mEdtMasked.getText().toString()).getUnMaskedString();
     }
 
     // ===========================================================

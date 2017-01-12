@@ -3,6 +3,7 @@ package com.vicmikhailau.maskededittext;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.v7.widget.AppCompatEditText;
+import android.text.Editable;
 import android.util.AttributeSet;
 
 public class MaskedEditText extends AppCompatEditText {
@@ -11,8 +12,7 @@ public class MaskedEditText extends AppCompatEditText {
     // Fields
     // ===========================================================
 
-    private String mMask;
-
+    private MaskedFormatter mMaskedFormatter;
     private MaskedWatcher mMaskedWatcher;
 
     // ===========================================================
@@ -25,11 +25,10 @@ public class MaskedEditText extends AppCompatEditText {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.MaskedEditText);
 
         if (typedArray.hasValue(R.styleable.MaskedEditText_mask)) {
-            mMask = typedArray.getString(R.styleable.MaskedEditText_mask);
+            String maskStr = typedArray.getString(R.styleable.MaskedEditText_mask);
 
-            if (mMask != null && !mMask.isEmpty()) {
-                mMaskedWatcher = new MaskedWatcher(mMask, this);
-                addTextChangedListener(mMaskedWatcher);
+            if (maskStr != null && !maskStr.isEmpty()) {
+                setMask(maskStr);
             }
         }
 
@@ -40,18 +39,24 @@ public class MaskedEditText extends AppCompatEditText {
     // Getter & Setter
     // ===========================================================
 
-    public String getMask() {
-        return mMask;
+    public String getMaskString() {
+        return mMaskedFormatter.getMaskString();
     }
 
-    public void setMask(String mMask) {
-        this.mMask = mMask;
+    public String getUnMaskedText() {
+        String currentText = getText().toString();
+        IFormattedString formattedString = mMaskedFormatter.formatString(currentText);
+        return formattedString.getUnMaskedString();
+    }
+
+    public void setMask(String mMaskStr) {
+        mMaskedFormatter = new MaskedFormatter(mMaskStr);
 
         if (mMaskedWatcher != null) {
             removeTextChangedListener(mMaskedWatcher);
         }
 
-        mMaskedWatcher = new MaskedWatcher(this.mMask, this);
+        mMaskedWatcher = new MaskedWatcher(mMaskedFormatter, this);
         addTextChangedListener(mMaskedWatcher);
     }
 

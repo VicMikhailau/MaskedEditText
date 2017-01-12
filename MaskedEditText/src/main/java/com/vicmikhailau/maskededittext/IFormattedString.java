@@ -2,27 +2,27 @@ package com.vicmikhailau.maskededittext;
 
 
 public interface IFormattedString extends CharSequence  {
-    String getRawString();
+    String getUnMaskedString();
 }
 
 
 abstract class AbstractFormattedString implements IFormattedString{
     private String mFormattedString;
-    private final String mRawString;
+    private final String mUnmaskedString;
     final Mask mMask;
 
 
     AbstractFormattedString(Mask mask, String rawString){
         mMask = mask;
-        mRawString = buildRawString(rawString);
+        mUnmaskedString = buildRawString(rawString);
     }
 
 
     abstract String formatString();
     abstract String buildRawString(String str);
 
-    public String getRawString() {
-        return mRawString;
+    public String getUnMaskedString() {
+        return mUnmaskedString;
     }
 
 
@@ -74,10 +74,10 @@ class FormattedString extends AbstractFormattedString {
         int maskCharIndex = 0;
         char stringCharacter;
 
-        while (strIndex < getRawString().length() && maskCharIndex < mMask.size()) {
+        while (strIndex < getUnMaskedString().length() && maskCharIndex < mMask.size()) {
             MaskCharacter maskChar = mMask.get(maskCharIndex);
 
-            stringCharacter = getRawString().charAt(strIndex);
+            stringCharacter = getUnMaskedString().charAt(strIndex);
 
             if (maskChar.isValidCharacter(stringCharacter)) {
                 builder.append(maskChar.processCharacter(stringCharacter));

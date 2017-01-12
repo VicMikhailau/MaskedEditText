@@ -12,7 +12,7 @@ public class MaskedWatcher implements TextWatcher {
     // Fields
     // ===========================================================
 
-    private MaskedFormatter mMaskFormatter;
+    private final WeakReference<MaskedFormatter> mMaskFormatter;
     private final WeakReference<EditText> mEditText;
     private String oldFormattedValue = "";
     private int oldCursorPosition;
@@ -21,21 +21,9 @@ public class MaskedWatcher implements TextWatcher {
     // Constructors
     // ===========================================================
 
-    public MaskedWatcher(String mask, EditText editText) {
-        mMaskFormatter = new MaskedFormatter(mask);
+    public MaskedWatcher(MaskedFormatter maskedFormatter, EditText editText) {
+        mMaskFormatter = new WeakReference<>(maskedFormatter);
         mEditText = new WeakReference<>(editText);
-    }
-
-    // ===========================================================
-    // Getter & Setter
-    // ===========================================================
-
-    public String getMask() {
-        return mMaskFormatter.getMask();
-    }
-
-    public void setMask(String mask) {
-        mMaskFormatter.setMask(mask);
     }
 
     // ===========================================================
@@ -50,11 +38,11 @@ public class MaskedWatcher implements TextWatcher {
 
         String value =  s.toString();
 
-        if (value.length() > oldFormattedValue.length() &&  mMaskFormatter.getMaskLength() < value.length()) {
+        if (value.length() > oldFormattedValue.length() &&  mMaskFormatter.get().getMaskLength() < value.length()) {
             value = oldFormattedValue;
         }
 
-        IFormattedString formattedString = mMaskFormatter.formatString(value);
+        IFormattedString formattedString = mMaskFormatter.get().formatString(value);
 
         if (!TextUtils.equals(s, formattedString)) {
             s.replace(0, s.length(), formattedString);

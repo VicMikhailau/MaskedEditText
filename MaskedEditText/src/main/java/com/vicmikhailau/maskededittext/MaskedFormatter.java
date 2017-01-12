@@ -14,7 +14,7 @@ public class MaskedFormatter {
     }
 
 
-    public String getMask() {
+    public String getMaskString() {
         if (mMask != null) {
             return mMask.getFormatString();
         }
