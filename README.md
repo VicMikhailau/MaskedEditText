@@ -31,22 +31,21 @@ Just add in xml custom MaskedEditText with attribute app:mask="your_mask" like b
 ```
 Or add TextChangedListener for your EditText like in following code:
 
-    ```java
-    MaskedFormatter formatter = new MaskedFormatter("your_mask");
-    mEditText.addTextChangedListener(new MaskedWatcher(formatter, mEditText));
-    ```
+```java
+MaskedFormatter formatter = new MaskedFormatter("your_mask");
+mEditText.addTextChangedListener(new MaskedWatcher(formatter, mEditText));
+```
 
 **For create your mask you need to use following keys:**
-
-    ```
-    ANYTHING KEY = *;
-    DIGIT KEY = #;
-    UPPERCASE KEY = U;
-    LOWERCASE KEY = L;
-    ALPHA NUMERIC KEY = A;
-    CHARACTER KEY = ?;
-    HEX KEY = H;
-    ```
+```
+ANYTHING KEY = *;
+DIGIT KEY = #;
+UPPERCASE KEY = U;
+LOWERCASE KEY = L;
+ALPHA NUMERIC KEY = A;
+CHARACTER KEY = ?;
+HEX KEY = H;
+```
 
 For example: you would like create a mask for a mobile number in format **(029)777-77-77**. Just use the simple mask **"(###)###-##-##"**.
 
