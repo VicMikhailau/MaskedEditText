@@ -32,32 +32,34 @@ Just add in xml custom MaskedEditText with attribute app:mask="your_mask" like b
 Or add TextChangedListener for your EditText like in following code:
 
 ```java
-mEditText.addTextChangedListener(new MaskedWatcher("your_mask"));
+MaskedFormatter formatter = new MaskedFormatter("your_mask");
+mEditText.addTextChangedListener(new MaskedWatcher(formatter, mEditText));
 ```
 
 **For create your mask you need to use following keys:**
-
-    ANYTHING KEY = *;
-    DIGIT KEY = #;
-    UPPERCASE KEY = U;
-    LOWERCASE KEY = L;
-    ALPHA NUMERIC KEY = A;
-    LITERAL KEY = \';
-    CHARACTER KEY = ?;
-    HEX KEY = H;
+```
+ANYTHING KEY = *;
+DIGIT KEY = #;
+UPPERCASE KEY = U;
+LOWERCASE KEY = L;
+ALPHA NUMERIC KEY = A;
+CHARACTER KEY = ?;
+HEX KEY = H;
+```
 
 For example: you would like create a mask for a mobile number in format **(029)777-77-77**. Just use the simple mask **"(###)###-##-##"**.
 
 **If you want to get text without mask just use following code:**
  - For getting unmasked text for **MaskedEditText mEdtMaskedCustom** just use
  
+    ```java
+    String unamskedString = mEdtMaskedCustom.getUnMaskedString();
     ```
-    mEdtMaskedCustom.getUnMaskedString().
-    ```
- - For getting unmasked text for default EditText with **MaskedWatcher mMaskedWatcher** just use
+ - For getting unmasked text for default EditText just use
  
-    ```
-    mMaskedWatcher.getUnMaskedString().
+    ```java
+    String text = mEditText.getText().toString();
+    String unmaskedString = formatter.formatString(text).getUnMaskedString();
     ```
 
 # Change Logs
