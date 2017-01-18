@@ -7,7 +7,7 @@ It allows you to add a mask to EditText
 
 # Version
 
-2.0.0
+2.0.1
 
 # Installation
 
@@ -15,7 +15,7 @@ To use this library in your android project, just simply add the following depen
 
 ```sh
 dependencies {
-    compile 'com.vicmikhailau:MaskedEditText:2.0.0'
+    compile 'com.vicmikhailau:MaskedEditText:2.0.1'
 }
 ```
 
@@ -35,7 +35,8 @@ Or add TextChangedListener for your EditText like in following code:
 MaskedFormatter formatter = new MaskedFormatter("your_mask");
 mEditText.addTextChangedListener(new MaskedWatcher(formatter, mEditText));
 ```
-
+Object of MaskedWatcher class has got a weakreference to formatter object, so you must to conside this.
+ 
 **For create your mask you need to use following keys:**
 ```
 ANYTHING KEY = *;
@@ -64,6 +65,10 @@ For example: you would like create a mask for a mobile number in format **(029)7
 
 # Change Logs
 
+### v2.0.1
+ 
+Bug with mask was fixed.
+ 
 ### v2.0.0
 
 Main logic was updated. Bugs with deleting and changing characters inside masked EditText was fixed
