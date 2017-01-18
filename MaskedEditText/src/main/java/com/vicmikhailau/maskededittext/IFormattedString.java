@@ -8,12 +8,14 @@ public interface IFormattedString extends CharSequence  {
 
 abstract class AbstractFormattedString implements IFormattedString{
     private String mFormattedString;
+    private final String mRawString;
     private final String mUnmaskedString;
     final Mask mMask;
 
 
     AbstractFormattedString(Mask mask, String rawString){
         mMask = mask;
+        mRawString = rawString;
         mUnmaskedString = buildRawString(rawString);
     }
 
@@ -37,6 +39,10 @@ abstract class AbstractFormattedString implements IFormattedString{
             mFormattedString = formatString();
         }
         return mFormattedString;
+    }
+
+    public String getInputString() {
+        return mRawString;
     }
 
     @Override
@@ -74,10 +80,10 @@ class FormattedString extends AbstractFormattedString {
         int maskCharIndex = 0;
         char stringCharacter;
 
-        while (strIndex < getUnMaskedString().length() && maskCharIndex < mMask.size()) {
+        while (strIndex < getInputString().length() && maskCharIndex < mMask.size()) {
             MaskCharacter maskChar = mMask.get(maskCharIndex);
 
-            stringCharacter = getUnMaskedString().charAt(strIndex);
+            stringCharacter = getInputString().charAt(strIndex);
 
             if (maskChar.isValidCharacter(stringCharacter)) {
                 builder.append(maskChar.processCharacter(stringCharacter));
