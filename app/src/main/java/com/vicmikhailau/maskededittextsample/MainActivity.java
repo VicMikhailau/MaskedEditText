@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     // ===========================================================
 
     private EditText mEdtMasked;
+    private MaskedFormatter formatter;
 
     // ===========================================================
     // Constructors
@@ -81,9 +82,8 @@ public class MainActivity extends AppCompatActivity {
      * @param mask your mask
      */
     private void setMask(String mask) {
-        MaskedFormatter formatter = new MaskedFormatter(mask);
+        formatter = new MaskedFormatter(mask);
         mEdtMasked.addTextChangedListener(new MaskedWatcher(formatter, mEdtMasked));
-        // Example how to get unmasked string in this case.
         String s = formatter.formatString(mEdtMasked.getText().toString()).getUnMaskedString();
     }
 
