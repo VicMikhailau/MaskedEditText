@@ -32,6 +32,16 @@ public class Mask {
         return mMask.get(index);
     }
 
+
+    public boolean isValidPrepopulateCharacter(char ch, int at) {
+        try {
+            MaskCharacter character = mMask.get(at);
+            return character.isPrepopulate() && character.isValidCharacter(ch);
+        } catch (IndexOutOfBoundsException e) {
+            return false;
+        }
+    }
+
     public boolean isValidPrepopulateCharacter(char ch){
         for (MaskCharacter maskCharacter : mPrepopulateCharacter){
             if (maskCharacter.isValidCharacter(ch)) {
