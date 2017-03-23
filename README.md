@@ -64,6 +64,10 @@ For example: you would like create a mask for a mobile number in format **(029)7
     ```
 
 # Change Logs
+ 
+### v2.0.2
+ 
+Bug with getting unmasked string was fixed (issue #11).
 
 ### v2.0.1
  
