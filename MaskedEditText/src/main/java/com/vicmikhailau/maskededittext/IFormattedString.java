@@ -67,7 +67,7 @@ class FormattedString extends AbstractFormattedString {
         int inputLen = Math.min(mMask.size(), str.length());
         for (int i = 0; i < inputLen; i++){
             char ch = str.charAt(i);
-            if (!mMask.isValidPrepopulateCharacter(ch))
+            if (!mMask.isValidPrepopulateCharacter(ch, i))
                 builder.append(ch);
         }
         return builder.toString();
