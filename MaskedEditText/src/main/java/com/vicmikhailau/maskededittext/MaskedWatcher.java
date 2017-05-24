@@ -3,7 +3,9 @@ package com.vicmikhailau.maskededittext;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.EditText;
+import android.support.v7.widget.AppCompatEditText;
 
 import java.lang.ref.WeakReference;
 
@@ -30,13 +32,41 @@ public class MaskedWatcher implements TextWatcher {
     // Listeners, methods for/from Interfaces
     // ===========================================================
 
+    private void setFormattedText(IFormattedString formattedString) {
+        EditText editText = mEditText.get();
+        if (editText == null) {
+            return;
+        }
+
+        int deltaLength = formattedString.length() - oldFormattedValue.length();
+
+
+        editText.removeTextChangedListener(this);
+        editText.setText(formattedString);
+        editText.addTextChangedListener(this);
+
+        int newCursorPosition = oldCursorPosition;
+
+        if (deltaLength > 0) {
+            newCursorPosition += deltaLength;
+        } else if (deltaLength < 0) {
+            newCursorPosition -= 1;
+        } else {
+            Mask mask = mMaskFormatter.get().mMask;
+            newCursorPosition = Math.max(1, Math.min(newCursorPosition, mMaskFormatter.get().getMaskLength()));
+            if (mask.get(newCursorPosition - 1).isPrepopulate())
+                newCursorPosition -= 1;
+        }
+        newCursorPosition = Math.max(0, Math.min(newCursorPosition, formattedString.length()));
+        editText.setSelection(newCursorPosition);
+    }
+
     @Override
     public void afterTextChanged(Editable s) {
-
         if (s == null)
             return;
 
-        String value =  s.toString();
+        String value = s.toString();
 
         if (value.length() > oldFormattedValue.length() &&  mMaskFormatter.get().getMaskLength() < value.length()) {
             value = oldFormattedValue;
@@ -44,19 +74,7 @@ public class MaskedWatcher implements TextWatcher {
 
         IFormattedString formattedString = mMaskFormatter.get().formatString(value);
 
-        if (!TextUtils.equals(s, formattedString)) {
-            s.replace(0, s.length(), formattedString);
-        }
-
-        int currentPosition =  mEditText.get().getSelectionStart();
-        if (oldCursorPosition - currentPosition > 0) {
-            int newPosition;
-            if (oldFormattedValue.length() - formattedString.length() > 1)
-                newPosition = Math.max(0, Math.min(formattedString.length(), oldCursorPosition));
-            else
-                newPosition = Math.max(0, Math.min(formattedString.length(), currentPosition));
-            mEditText.get().setSelection(newPosition);
-        }
+        setFormattedText(formattedString);
         oldFormattedValue = formattedString.toString();
     }
 
