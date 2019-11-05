@@ -13,7 +13,7 @@
 
 
     <com.vicmikhailau.maskededittext.MaskedEditText
-        android:id="@+id/edt_masked_custom"
+        android:id="@+id/edtMaskedCustom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
@@ -23,7 +23,7 @@
         app:mask="(###)###-##-##" />
 
     <EditText
-        android:id="@+id/edt_masked"
+        android:id="@+id/edtMasked"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
@@ -32,7 +32,7 @@
         android:textColor="@android:color/black" />
 
     <com.vicmikhailau.maskededittext.MaskedEditText
-        android:id="@+id/edt_masked_custom_sample"
+        android:id="@+id/edtMaskedCustomSample"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/edt_masked_custom_sample_hint"

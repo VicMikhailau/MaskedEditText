@@ -1,15 +1,12 @@
-package com.vicmikhailau.maskededittextsample;
+package com.vicmikhailau.maskededittextsample
 
-import android.os.Bundle;
-import android.widget.EditText;
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.vicmikhailau.maskededittext.MaskedFormatter
+import com.vicmikhailau.maskededittext.MaskedWatcher
+import kotlinx.android.synthetic.main.activity_main.*
 
-import com.vicmikhailau.maskededittext.MaskedEditText;
-import com.vicmikhailau.maskededittext.MaskedFormatter;
-import com.vicmikhailau.maskededittext.MaskedWatcher;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-public class MainActivity extends AppCompatActivity {
+class MainActivity : AppCompatActivity() {
 
     /**
      * Use specific values for create your own mask (see example below or in xml):
@@ -36,9 +33,7 @@ public class MainActivity extends AppCompatActivity {
     // Fields
     // ===========================================================
 
-    private MaskedEditText mEdtMaskedCustom;
-    private EditText mEdtMasked;
-    private MaskedFormatter formatter;
+    private var formatter: MaskedFormatter? = null
 
     // ===========================================================
     // Constructors
@@ -53,12 +48,10 @@ public class MainActivity extends AppCompatActivity {
     // ===========================================================
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        findViews();
-        setMask("##/##/####");
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        setMask("##/##/####")
     }
 
     // ===========================================================
@@ -69,11 +62,6 @@ public class MainActivity extends AppCompatActivity {
     // Methods
     // ===========================================================
 
-    private void findViews() {
-        mEdtMaskedCustom = (MaskedEditText) findViewById(R.id.edt_masked_custom);
-        mEdtMasked = (EditText) findViewById(R.id.edt_masked);
-    }
-
     /**
      * You cas use MaskedEditText declared in xml with attribute named mask
      * or
@@ -81,14 +69,14 @@ public class MainActivity extends AppCompatActivity {
      *
      * @param mask your mask
      */
-    private void setMask(String mask) {
-        formatter = new MaskedFormatter(mask);
-        mEdtMasked.addTextChangedListener(new MaskedWatcher(formatter, mEdtMasked));
-        String s = formatter.formatString(mEdtMasked.getText().toString()).getUnMaskedString();
+    private fun setMask(mask: String) {
+        formatter = MaskedFormatter(mask)
+        edtMasked.addTextChangedListener(MaskedWatcher(formatter!!, edtMasked!!))
+        val s = formatter?.formatString(edtMasked.text.toString())?.unMaskedString
     }
 
-    private void getUnMaskedTextForEdtCustom() {
-        mEdtMaskedCustom.getUnMaskedText();
+    private fun getUnMaskedTextForEdtCustom() {
+        edtMaskedCustom.unMaskedText
     }
 
     // ===========================================================
