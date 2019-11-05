@@ -1,4 +1,4 @@
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-MaskedEditText-green.svg?style=true)](https://android-arsenal.com/details/1/3659) [![Codewake](https://www.codewake.com/badges/ask_question.svg)](https://www.codewake.com/p/maskededittext)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-MaskedEditText-green.svg?style=true)](https://android-arsenal.com/details/1/3659)
 # MaskedEditText
 
 It allows you to add a mask to EditText
@@ -7,7 +7,7 @@ It allows you to add a mask to EditText
 
 # Version
 
-2.0.4
+3.0.1
 
 # Installation
 
@@ -15,7 +15,7 @@ To use this library in your android project, just simply add the following depen
 
 ```sh
 dependencies {
-    compile 'com.vicmikhailau:MaskedEditText:2.0.4'
+    implementation 'com.vicmikhailau:MaskedEditText:3.0.1'
 }
 ```
 
@@ -63,7 +63,15 @@ For example: you would like create a mask for a mobile number in format **(029)7
     String unmaskedString = formatter.formatString(text).getUnMaskedString();
     ```
 
+# Fixes and updates
+
+Unfortunately, there is no way to devote much time to the project. Please feel free to Fork the project and add Pull requests. Thanks a lot!
+
 # Change Logs
+
+### v3.0.1
+
+Moved library to androidx and kotlin.
 
 ### v2.0.4
 

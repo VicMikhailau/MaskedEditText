@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 ext {
     bintrayRepo = 'maven'
@@ -15,7 +15,7 @@ ext {
     siteUrl = 'https://github.com/VicMikhailau/MaskedEditText'
     gitUrl = 'https://github.com/VicMikhailau/MaskedEditText.git'
 
-    libraryVersion = '2.0.4'
+    libraryVersion = '3.0.1'
 
     developerId = 'VicMikhailau'
     developerName = 'Vic Mikhailau'
@@ -32,8 +32,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 29
-        versionCode 3
-        versionName "2.0.4"
+        versionCode 5
+        versionName "3.0.1"
     }
     buildTypes {
         release {
@@ -41,6 +41,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+}
+
+tasks.withType(Javadoc).all {
+    excludes = ['**/*.kt']
 }
 
 ext {
