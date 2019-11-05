@@ -1,11 +1,8 @@
 package com.vicmikhailau.maskededittext;
 
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.widget.EditText;
-import android.support.v7.widget.AppCompatEditText;
 
 import java.lang.ref.WeakReference;
 

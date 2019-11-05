@@ -1,12 +1,13 @@
 package com.vicmikhailau.maskededittextsample;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 
 import com.vicmikhailau.maskededittext.MaskedEditText;
 import com.vicmikhailau.maskededittext.MaskedFormatter;
 import com.vicmikhailau.maskededittext.MaskedWatcher;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 

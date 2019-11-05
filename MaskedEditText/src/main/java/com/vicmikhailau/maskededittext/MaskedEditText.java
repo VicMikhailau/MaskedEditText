@@ -2,9 +2,9 @@ package com.vicmikhailau.maskededittext;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.v7.widget.AppCompatEditText;
-import android.text.Editable;
 import android.util.AttributeSet;
+
+import androidx.appcompat.widget.AppCompatEditText;
 
 public class MaskedEditText extends AppCompatEditText {
 

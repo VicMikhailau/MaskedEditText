@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 29
 
     defaultConfig {
         applicationId "com.vicmikhailau.maskededittextsample"
         minSdkVersion 14
-        targetSdkVersion 26
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
     }
@@ -19,12 +19,12 @@ android {
 }
 
 ext {
-    support = "26.1.0"
+    androidx_appcompat = "1.1.0"
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
-    compile "com.android.support:appcompat-v7:$support"
-    compile project(':MaskedEditText')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation 'junit:junit:4.12'
+    implementation "androidx.appcompat:appcompat:$androidx_appcompat"
+    implementation project(':MaskedEditText')
 }
