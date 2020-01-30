@@ -49,9 +49,9 @@ class Mask() {
         for (ch in fmtString.toCharArray()) {
             val maskCharacter = mFabric.buildCharacter(ch)
             if (maskCharacter?.isPrepopulate == true) {
-                mPrepopulateCharacter!!.add(maskCharacter)
+                mPrepopulateCharacter?.add(maskCharacter)
             }
-            result.add(maskCharacter!!)
+            maskCharacter?.let { result.add(it) }
         }
         return result
     }

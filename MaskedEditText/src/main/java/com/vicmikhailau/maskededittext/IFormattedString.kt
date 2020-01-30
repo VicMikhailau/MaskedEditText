@@ -25,10 +25,7 @@ internal abstract class AbstractFormattedString(val mMask: Mask, val inputString
         get() = toString().length
 
     override fun toString(): String {
-        if (mFormattedString == null) {
-            mFormattedString = formatString()
-        }
-        return mFormattedString!!
+        return mFormattedString ?: formatString()
     }
 
     override fun subSequence(startIndex: Int, endIndex: Int): CharSequence {
