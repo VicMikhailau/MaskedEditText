@@ -42,9 +42,17 @@ class MaskedWatcher(maskedFormatter: MaskedFormatter, editText: EditText) : Text
         } else if (deltaLength < 0) {
             newCursorPosition -= 1
         } else {
-            val mask = mMaskFormatter.get()!!.mMask
-            newCursorPosition = 1.coerceAtLeast(newCursorPosition.coerceAtMost(mMaskFormatter.get()!!.maskLength))
-            if (mask!![newCursorPosition - 1].isPrepopulate)
+            var mask: Mask? = null
+            mMaskFormatter.get()?.mMask?.let { mask = it }
+
+            var maskLength = 0
+            mMaskFormatter.get()?.maskLength?.let { maskLength = it}
+            newCursorPosition = 1.coerceAtLeast(newCursorPosition.coerceAtMost(maskLength))
+
+
+            var isPopulate = false
+            mask?.get(newCursorPosition - 1)?.isPrepopulate?.let { isPopulate = it }
+            if (isPopulate)
                 newCursorPosition -= 1
         }
         newCursorPosition = 0.coerceAtLeast(newCursorPosition.coerceAtMost(formattedString.length))
@@ -57,18 +65,21 @@ class MaskedWatcher(maskedFormatter: MaskedFormatter, editText: EditText) : Text
 
         var value = s.toString()
 
-        if (value.length > oldFormattedValue.length && mMaskFormatter.get()!!.maskLength < value.length) {
+        var maskLength = 0
+        mMaskFormatter.get()?.maskLength?.let { maskLength = it}
+
+        if (value.length > oldFormattedValue.length && maskLength < value.length) {
             value = oldFormattedValue
         }
 
-        val formattedString = mMaskFormatter.get()!!.formatString(value)
+        val formattedString = mMaskFormatter.get()?.formatString(value)
 
-        setFormattedText(formattedString)
+        formattedString?.let { setFormattedText(it) }
         oldFormattedValue = formattedString.toString()
     }
 
     override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-        this.oldCursorPosition = mEditText.get()!!.selectionStart
+        mEditText.get()?.selectionStart?.let { this.oldCursorPosition = it }
     }
 
     override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}

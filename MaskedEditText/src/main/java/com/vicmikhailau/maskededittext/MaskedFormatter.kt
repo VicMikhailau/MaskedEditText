@@ -6,12 +6,10 @@ class MaskedFormatter internal constructor() {
 
 
     val maskString: String?
-        get() = if (mMask != null) {
-            mMask!!.formatString
-        } else null
+        get() = mMask?.formatString
 
-    val maskLength: Int
-        get() = mMask!!.size()
+    val maskLength: Int?
+        get() = mMask?.size()
 
     init {
         mMask = null
@@ -21,13 +19,13 @@ class MaskedFormatter internal constructor() {
         this.setMask(fmtString)
     }
 
-    fun setMask(fmtString: String) {
+    private fun setMask(fmtString: String) {
         mMask = Mask(fmtString)
     }
 
 
-    fun formatString(value: String): IFormattedString {
-        return mMask!!.getFormattedString(value)
+    fun formatString(value: String): IFormattedString? {
+        return mMask?.getFormattedString(value)
     }
 
 }

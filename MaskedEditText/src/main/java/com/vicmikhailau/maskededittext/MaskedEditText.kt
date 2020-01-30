@@ -22,13 +22,13 @@ class MaskedEditText(context: Context, attrs: AttributeSet) : AppCompatEditText(
     // ===========================================================
 
     val maskString: String?
-        get() = mMaskedFormatter!!.maskString
+        get() = mMaskedFormatter?.maskString
 
-    val unMaskedText: String
+    val unMaskedText: String?
         get() {
-            val currentText = text!!.toString()
-            val formattedString = mMaskedFormatter!!.formatString(currentText)
-            return formattedString.unMaskedString
+            val currentText = text?.toString()
+            val formattedString = currentText?.let { mMaskedFormatter?.formatString(it) }
+            return formattedString?.unMaskedString
         }
 
     init {
@@ -46,14 +46,14 @@ class MaskedEditText(context: Context, attrs: AttributeSet) : AppCompatEditText(
         typedArray.recycle()
     }
 
-    fun setMask(mMaskStr: String) {
+    private fun setMask(mMaskStr: String) {
         mMaskedFormatter = MaskedFormatter(mMaskStr)
 
         if (mMaskedWatcher != null) {
             removeTextChangedListener(mMaskedWatcher)
         }
 
-        mMaskedWatcher = MaskedWatcher(mMaskedFormatter!!, this)
+        mMaskedFormatter?.let { mMaskedWatcher = MaskedWatcher(it, this) }
         addTextChangedListener(mMaskedWatcher)
     }
 
