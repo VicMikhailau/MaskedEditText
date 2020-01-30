@@ -27,7 +27,7 @@ ext {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13'
     implementation "androidx.appcompat:appcompat:$androidx_appcompat"
     implementation project(':MaskedEditText')
     implementation "androidx.core:core-ktx:$androidx_core_ktx"
