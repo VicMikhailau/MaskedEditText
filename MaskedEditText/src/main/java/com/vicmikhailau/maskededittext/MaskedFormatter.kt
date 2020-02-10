@@ -19,7 +19,7 @@ class MaskedFormatter internal constructor() {
         this.setMask(fmtString)
     }
 
-    private fun setMask(fmtString: String) {
+    fun setMask(fmtString: String) {
         mMask = Mask(fmtString)
     }
 
