@@ -46,7 +46,7 @@ class MaskedEditText(context: Context, attrs: AttributeSet) : AppCompatEditText(
         typedArray.recycle()
     }
 
-    private fun setMask(mMaskStr: String) {
+    fun setMask(mMaskStr: String) {
         mMaskedFormatter = MaskedFormatter(mMaskStr)
 
         if (mMaskedWatcher != null) {
