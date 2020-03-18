@@ -71,8 +71,10 @@ class MainActivity : AppCompatActivity() {
      */
     private fun setMask(mask: String) {
         formatter = MaskedFormatter(mask)
-        edtMasked.addTextChangedListener(MaskedWatcher(formatter!!, edtMasked!!))
-        val s = formatter?.formatString(edtMasked.text.toString())?.unMaskedString
+        formatter?.let{
+            edtMasked?.addTextChangedListener(MaskedWatcher(it, edtMasked))
+        }
+        val s = formatter?.formatString(edtMasked?.text.toString())?.unMaskedString
     }
 
     private fun getUnMaskedTextForEdtCustom() {
