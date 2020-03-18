@@ -15,7 +15,7 @@ ext {
     siteUrl = 'https://github.com/VicMikhailau/MaskedEditText'
     gitUrl = 'https://github.com/VicMikhailau/MaskedEditText.git'
 
-    libraryVersion = '3.0.3'
+    libraryVersion = '3.0.4'
 
     developerId = 'VicMikhailau'
     developerName = 'Vic Mikhailau'
@@ -32,8 +32,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 29
-        versionCode 7
-        versionName "3.0.3"
+        versionCode 8
+        versionName "3.0.4"
     }
     buildTypes {
         release {
