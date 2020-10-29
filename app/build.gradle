@@ -3,14 +3,15 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
 
     defaultConfig {
         applicationId "com.vicmikhailau.maskededittextsample"
         minSdkVersion 14
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -18,16 +19,30 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    compileOptions {
+        // Flag to enable support for the new language APIs.
+        coreLibraryDesugaringEnabled true
+        // Sets Java compatibility to Java 8.
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 ext {
-    androidx_appcompat = "1.1.0"
-    androidx_core_ktx = "1.2.0"
+    desugar_jdk_libs = '1.0.10'
+    androidx_appcompat = '1.2.0'
+    androidx_core_ktx = '1.3.2'
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    testImplementation 'junit:junit:4.13'
+    coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:$desugar_jdk_libs"
+    testImplementation 'junit:junit:4.13.1'
     implementation "androidx.appcompat:appcompat:$androidx_appcompat"
     implementation project(':MaskedEditText')
     implementation "androidx.core:core-ktx:$androidx_core_ktx"
