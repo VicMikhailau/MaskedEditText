@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.vicmikhailau.maskededittext.MaskedFormatter
 import com.vicmikhailau.maskededittext.MaskedWatcher
-import kotlinx.android.synthetic.main.activity_main.*
+import com.vicmikhailau.maskededittextsample.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,6 +35,8 @@ class MainActivity : AppCompatActivity() {
 
     private var formatter: MaskedFormatter? = null
 
+    private lateinit var binding: ActivityMainBinding
+
     // ===========================================================
     // Constructors
     // ===========================================================
@@ -50,7 +52,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setMask("##/##/####")
     }
 
@@ -72,17 +75,16 @@ class MainActivity : AppCompatActivity() {
     private fun setMask(mask: String) {
         formatter = MaskedFormatter(mask)
         formatter?.let{
-            edtMasked?.addTextChangedListener(MaskedWatcher(it, edtMasked))
+            binding.edtMasked.addTextChangedListener(MaskedWatcher(it, binding.edtMasked))
         }
-        val s = formatter?.formatString(edtMasked?.text.toString())?.unMaskedString
+        val s = formatter?.formatString(binding.edtMasked.text.toString())?.unMaskedString
     }
 
     private fun getUnMaskedTextForEdtCustom() {
-        edtMaskedCustom.unMaskedText
+        binding.edtMaskedCustom.unMaskedText
     }
 
     // ===========================================================
     // Inner and Anonymous Classes
     // ===========================================================
-
 }
