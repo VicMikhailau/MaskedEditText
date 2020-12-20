@@ -63,6 +63,11 @@ For example: you would like create a mask for a mobile number in format **(029)7
     val unmaskedString = formatter.formatString(text).unMaskedString
     ```
 
+# Kotlin dependency in pure Java project
+
+Add in your build.gradle: ```implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"```
+https://github.com/VicMikhailau/MaskedEditText/issues/27
+
 # Fixes and updates
 
 Unfortunately, there is no way to devote much time to the project. Please feel free to Fork the project and add Pull requests. Thanks a lot!
