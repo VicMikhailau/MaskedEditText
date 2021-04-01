@@ -2,28 +2,11 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 ext {
-    bintrayRepo = 'maven'
-    bintrayName = 'MaskedEditText'
-
-    publishedGroupId = 'com.vicmikhailau'
-    libraryName = 'MaskedEditText'
-    artifact = 'MaskedEditText'
-
-    libraryDescription = 'Add a mask to EditText'
-
-    siteUrl = 'https://github.com/VicMikhailau/MaskedEditText'
-    gitUrl = 'https://github.com/VicMikhailau/MaskedEditText.git'
-
-    libraryVersion = '3.1.1'
-
-    developerId = 'VicMikhailau'
-    developerName = 'Vic Mikhailau'
-    developerEmail = 'vicmikhailau@gmail.com'
-
-    licenseName = 'The Apache Software License, Version 2.0'
-    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-    allLicenses = ["Apache-2.0"]
+    PUBLISH_GROUP_ID = 'io.github.vicmikhailau'
+    PUBLISH_VERSION = '4.0.5'
+    PUBLISH_ARTIFACT_ID = 'MaskedEditText'
 }
+apply from: "${rootProject.projectDir}/scripts/publish-mavencentral.gradle"
 
 android {
     compileSdkVersion 30
@@ -31,8 +14,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 30
-        versionCode 10
-        versionName "3.1.1"
+        versionCode 15
+        versionName "4.0.5"
     }
     buildTypes {
         release {
@@ -40,11 +23,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    sourceSets {
+        all {
+            it.java.srcDir "src/$it.name/kotlin"
+        }
+    }
 }
 
-tasks.withType(Javadoc).all {
-    excludes = ['**/*.kt']
-}
 
 ext {
     androidx_appcompat = '1.2.0'
@@ -53,13 +39,7 @@ ext {
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
-    api "androidx.appcompat:appcompat:$androidx_appcompat"
+    implementation "androidx.appcompat:appcompat:$androidx_appcompat"
     implementation "androidx.core:core-ktx:$androidx_core_ktx"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-}
-
-apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
-apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
-repositories {
-    mavenCentral()
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }

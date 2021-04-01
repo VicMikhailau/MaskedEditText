@@ -7,15 +7,25 @@ It allows you to add a mask to EditText
 
 # Version
 
-3.1.1
+4.0.5
 
 # Installation
 
-To use this library in your android project, just simply add the following dependency into your build.gradle
+**Step 1**: Add MavenCentral and Jitpack to your repositories in your *project* level `build.gradle` file:
+
+```gradle
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}
+```
+
+**Step 2**: Add the library as a dependency in your *module* level `build.gradle` file:
 
 ```sh
 dependencies {
-    implementation 'com.vicmikhailau:MaskedEditText:3.1.1'
+    implementation 'io.github.vicmikhailau:MaskedEditText:4.0.5'
 }
 ```
 
@@ -74,6 +84,10 @@ Unfortunately, there is no way to devote much time to the project. Please feel f
 
 # Change Logs
 
+### v4.0.5
+
+Moved project to the MavenCentral. Changed groupId to io.github.vicmikhailau
+
 ### v3.1.1
 
 Updated Gradle and libraries.
@@ -100,7 +114,7 @@ Moved library to androidx and kotlin.
 
 
 ## Licence
-Copyright 2016 Vic Mikhailau<br />
+Copyright 2021 Victor Mikhailau<br />
 <br />
 Licensed under the Apache License, Version 2.0 (the "License");<br />
 you may not use this file except in compliance with the License.<br />
