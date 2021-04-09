@@ -1,3 +1,5 @@
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.vicmikhailau/MaskedEditText/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.github.vicmikhailau/MaskedEditText)
+[![GitHub license](https://img.shields.io/github/license/VicMikhailau/MaskedEditText)](https://github.com/VicMikhailau/MaskedEditText/blob/master/LICENSE)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-MaskedEditText-green.svg?style=true)](https://android-arsenal.com/details/1/3659)
 # MaskedEditText
 
