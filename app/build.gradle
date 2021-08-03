@@ -2,12 +2,12 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
 
     defaultConfig {
         applicationId "com.vicmikhailau.maskededittextsample"
         minSdkVersion 14
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
@@ -38,8 +38,8 @@ android {
 
 ext {
     desugar_jdk_libs = '1.1.5'
-    androidx_appcompat = '1.2.0'
-    androidx_core_ktx = '1.3.2'
+    androidx_appcompat = '1.3.1'
+    androidx_core_ktx = '1.6.0'
 }
 
 dependencies {

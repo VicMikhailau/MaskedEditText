@@ -9,7 +9,7 @@ It allows you to add a mask to EditText
 
 # Version
 
-4.0.5
+4.0.6
 
 # Installation
 
@@ -25,9 +25,19 @@ allprojects {
 
 **Step 2**: Add the library as a dependency in your *module* level `build.gradle` file:
 
+*Groovy:*
+
 ```sh
 dependencies {
-    implementation 'io.github.vicmikhailau:MaskedEditText:4.0.5'
+    implementation 'io.github.vicmikhailau:MaskedEditText:4.0.6'
+}
+```
+
+*Kotlin:*
+
+```sh
+dependencies {
+    implementation("io.github.vicmikhailau:MaskedEditText:4.0.6")
 }
 ```
 
@@ -85,6 +95,10 @@ https://github.com/VicMikhailau/MaskedEditText/issues/27
 Unfortunately, there is no way to devote much time to the project. Please feel free to Fork the project and add Pull requests. Thanks a lot!
 
 # Change Logs
+
+### v4.0.6
+
+Updated Gradle and libraries. Changed targetSdkVersion to 31.
 
 ### v4.0.5
 
