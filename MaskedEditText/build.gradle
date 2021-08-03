@@ -3,7 +3,7 @@ apply plugin: 'kotlin-android'
 
 ext {
     PUBLISH_GROUP_ID = 'io.github.vicmikhailau'
-    PUBLISH_VERSION = '4.0.6'
+    PUBLISH_VERSION = '4.0.7'
     PUBLISH_ARTIFACT_ID = 'MaskedEditText'
 }
 apply from: "${rootProject.projectDir}/scripts/publish-mavencentral.gradle"

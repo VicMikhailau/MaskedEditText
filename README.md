@@ -9,7 +9,7 @@ It allows you to add a mask to EditText
 
 # Version
 
-4.0.6
+4.0.7
 
 # Installation
 
@@ -29,7 +29,7 @@ allprojects {
 
 ```sh
 dependencies {
-    implementation 'io.github.vicmikhailau:MaskedEditText:4.0.6'
+    implementation 'io.github.vicmikhailau:MaskedEditText:4.0.7'
 }
 ```
 
@@ -37,7 +37,7 @@ dependencies {
 
 ```sh
 dependencies {
-    implementation("io.github.vicmikhailau:MaskedEditText:4.0.6")
+    implementation("io.github.vicmikhailau:MaskedEditText:4.0.7")
 }
 ```
 
@@ -95,6 +95,10 @@ https://github.com/VicMikhailau/MaskedEditText/issues/27
 Unfortunately, there is no way to devote much time to the project. Please feel free to Fork the project and add Pull requests. Thanks a lot!
 
 # Change Logs
+
+### v4.0.7
+
+Fixed InflateException appeared in 4.0.6.
 
 ### v4.0.6
 

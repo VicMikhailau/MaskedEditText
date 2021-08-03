@@ -3,6 +3,7 @@ package com.vicmikhailau.maskededittext
 import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatEditText
+import com.vicmikhailau.maskededittext.R.*
 
 class MaskedEditText(context: Context, attrs: AttributeSet) : AppCompatEditText(context, attrs) {
 
@@ -33,10 +34,10 @@ class MaskedEditText(context: Context, attrs: AttributeSet) : AppCompatEditText(
 
     init {
 
-        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.MaskedEditText)
+        val typedArray = context.obtainStyledAttributes(attrs, styleable.MaskedEditText)
 
-        if (typedArray.hasValue(R.styleable.MaskedEditText_mask)) {
-            val maskStr = typedArray.getString(R.styleable.MaskedEditText_mask)
+        if (typedArray.hasValue(styleable.MaskedEditText_mask)) {
+            val maskStr = typedArray.getString(styleable.MaskedEditText_mask)
 
             if (maskStr != null && maskStr.isNotEmpty()) {
                 setMask(maskStr)
