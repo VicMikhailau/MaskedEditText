@@ -42,7 +42,7 @@ internal class FormattedString(mask: Mask, rawString: String) : AbstractFormatte
     override fun buildRawString(str: String): String {
         val builder = StringBuilder()
         val inputLen = mMask.size().coerceAtMost(str.length)
-        for (i in 0 until inputLen) {
+        for (i in 0 ..< inputLen) {
             val ch = str[i]
             if (!mMask.isValidPrepopulateCharacter(ch, i))
                 builder.append(ch)
