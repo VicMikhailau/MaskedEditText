@@ -6,7 +6,7 @@ import android.widget.EditText
 
 import java.lang.ref.WeakReference
 
-class MaskedWatcher(maskedFormatter: MaskedFormatter, editText: EditText) : TextWatcher {
+open class MaskedWatcher(maskedFormatter: MaskedFormatter, editText: EditText) : TextWatcher {
 
     // ===========================================================
     // Constructors
@@ -16,14 +16,38 @@ class MaskedWatcher(maskedFormatter: MaskedFormatter, editText: EditText) : Text
     // Fields
     // ===========================================================
 
-    private val mMaskFormatter: WeakReference<MaskedFormatter> = WeakReference(maskedFormatter)
+    private val mMaskFormatter: MaskedFormatter = maskedFormatter
     private val mEditText: WeakReference<EditText> = WeakReference(editText)
     private var oldFormattedValue = ""
     private var oldCursorPosition: Int = 0
 
+    // Listeners.
+    private var beforeTextChanged: ((text: CharSequence?, start: Int, count: Int, after: Int) -> Unit)? = null
+    private var onTextChanged: ((text: CharSequence?, start: Int, before: Int, count: Int) -> Unit)? = null
+    private var afterTextChanged: ((text: Editable?) -> Unit)? = null
+
     // ===========================================================
     // Listeners, methods for/from Interfaces
     // ===========================================================
+
+    fun addTextChangedListener(
+            beforeTextChanged: ((
+                    text: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+            ) -> Unit)? = null,
+            onTextChanged: ((
+                    text: CharSequence?,
+                    start: Int,
+                    before: Int,
+                    count: Int
+            ) -> Unit)? = null,
+            afterTextChanged: ((text: Editable?) -> Unit)? = null) {
+        this.beforeTextChanged = beforeTextChanged
+        this.onTextChanged = onTextChanged
+        this.afterTextChanged = afterTextChanged
+    }
 
     private fun setFormattedText(formattedString: IFormattedString) {
         val editText = mEditText.get() ?: return
@@ -43,10 +67,10 @@ class MaskedWatcher(maskedFormatter: MaskedFormatter, editText: EditText) : Text
             newCursorPosition -= 1
         } else {
             var mask: Mask? = null
-            mMaskFormatter.get()?.mMask?.let { mask = it }
+            mMaskFormatter.mMask?.let { mask = it }
 
             var maskLength = 0
-            mMaskFormatter.get()?.maskLength?.let { maskLength = it}
+            mMaskFormatter.maskLength?.let { maskLength = it}
             newCursorPosition = 1.coerceAtLeast(newCursorPosition.coerceAtMost(maskLength))
 
 
@@ -66,21 +90,25 @@ class MaskedWatcher(maskedFormatter: MaskedFormatter, editText: EditText) : Text
         var value = s.toString()
 
         var maskLength = 0
-        mMaskFormatter.get()?.maskLength?.let { maskLength = it}
+        mMaskFormatter.maskLength?.let { maskLength = it}
 
         if (value.length > oldFormattedValue.length && maskLength < value.length) {
             value = oldFormattedValue
         }
 
-        val formattedString = mMaskFormatter.get()?.formatString(value)
+        val formattedString = mMaskFormatter.formatString(value)
 
         formattedString?.let { setFormattedText(it) }
         oldFormattedValue = formattedString.toString()
+        afterTextChanged?.invoke(s)
     }
 
     override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
         mEditText.get()?.selectionStart?.let { this.oldCursorPosition = it }
+        beforeTextChanged?.invoke(s, start, count, after)
     }
 
-    override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+    override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+        onTextChanged?.invoke(s, start, before, count)
+    }
 }

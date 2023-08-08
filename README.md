@@ -9,7 +9,7 @@ It allows you to add a mask to EditText
 
 # Version
 
-5.0.0
+5.0.1
 
 # Installation
 
@@ -29,7 +29,7 @@ allprojects {
 
 ```sh
 dependencies {
-    implementation 'io.github.vicmikhailau:MaskedEditText:5.0.0'
+    implementation 'io.github.vicmikhailau:MaskedEditText:5.0.1'
 }
 ```
 
@@ -37,7 +37,7 @@ dependencies {
 
 ```sh
 dependencies {
-    implementation("io.github.vicmikhailau:MaskedEditText:5.0.0")
+    implementation("io.github.vicmikhailau:MaskedEditText:5.0.1")
 }
 ```
 
@@ -57,8 +57,21 @@ Or add TextChangedListener for your EditText like in following code:
 val formatter = MaskedFormatter("your_mask")
 mEditText.addTextChangedListener(MaskedWatcher(formatter, mEditText))
 ```
-Object of MaskedWatcher class has got a weakreference to formatter object, so you must to conside this.
- 
+Connect to the MaskedWatcher for your MaskedEditText through:
+
+```
+mMaskedEditText.addMaskedTextChangedListener
+mMaskedEditText.doBeforeMaskedTextChanged
+mMaskedEditText.doOnMaskedTextChanged
+mMaskedEditText.doAfterMaskedTextChanged
+```
+
+Or use MaskedWatcher reference:
+
+```
+maskedWatcher.addTextChangedListener
+```
+
 **For create your mask you need to use following keys:**
 ```
 ANYTHING KEY = *
@@ -95,6 +108,10 @@ https://github.com/VicMikhailau/MaskedEditText/issues/27
 Unfortunately, there is no way to devote much time to the project. Please feel free to Fork the project and add Pull requests. Thanks a lot!
 
 # Change Logs
+
+### v5.0.1
+
+Added convenient MaskedEditText listeners.
 
 ### v5.0.0
 

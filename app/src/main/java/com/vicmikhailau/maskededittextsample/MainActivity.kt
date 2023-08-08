@@ -4,6 +4,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.vicmikhailau.maskededittext.MaskedFormatter
 import com.vicmikhailau.maskededittext.MaskedWatcher
+import com.vicmikhailau.maskededittext.addMaskedTextChangedListener
+import com.vicmikhailau.maskededittext.doAfterMaskedTextChanged
+import com.vicmikhailau.maskededittext.doBeforeMaskedTextChanged
+import com.vicmikhailau.maskededittext.doOnMaskedTextChanged
 import com.vicmikhailau.maskededittextsample.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -55,6 +59,26 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setMask("##/##/####")
+        setListener()
+    }
+
+    fun setListener() {
+        // Sample.
+        binding.apply{
+            edtMaskedCustomSample.apply {
+                // Common.
+                addMaskedTextChangedListener(
+                        beforeMaskedTextChanged = { _: CharSequence?, _: Int, _: Int, _: Int -> },
+                        onMaskedTextChanged = { _: CharSequence?, _: Int, _: Int, _: Int -> },
+                        afterMaskedTextChanged = {}
+                )
+
+                // Separate.
+                doBeforeMaskedTextChanged { text, start, count, after ->  }
+                doOnMaskedTextChanged { text, start, before, count ->  }
+                doAfterMaskedTextChanged {  }
+            }
+        }
     }
 
     // ===========================================================
