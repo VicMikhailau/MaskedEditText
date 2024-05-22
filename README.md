@@ -9,7 +9,7 @@ It allows you to add a mask to EditText
 
 # Version
 
-5.0.1
+5.0.2
 
 # Installation
 
@@ -29,7 +29,7 @@ allprojects {
 
 ```sh
 dependencies {
-    implementation 'io.github.vicmikhailau:MaskedEditText:5.0.1'
+    implementation 'io.github.vicmikhailau:MaskedEditText:5.0.2'
 }
 ```
 
@@ -37,7 +37,7 @@ dependencies {
 
 ```sh
 dependencies {
-    implementation("io.github.vicmikhailau:MaskedEditText:5.0.1")
+    implementation("io.github.vicmikhailau:MaskedEditText:5.0.2")
 }
 ```
 
@@ -108,6 +108,10 @@ https://github.com/VicMikhailau/MaskedEditText/issues/27
 Unfortunately, there is no way to devote much time to the project. Please feel free to Fork the project and add Pull requests. Thanks a lot!
 
 # Change Logs
+
+### v5.0.2
+
+Updated dependencies and targetSdk to 34.
 
 ### v5.0.1
 

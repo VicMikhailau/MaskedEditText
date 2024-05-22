@@ -3,17 +3,17 @@ apply plugin: 'kotlin-android'
 
 ext {
     PUBLISH_GROUP_ID = 'io.github.vicmikhailau'
-    PUBLISH_VERSION = '5.0.1'
+    PUBLISH_VERSION = '5.0.2'
     PUBLISH_ARTIFACT_ID = 'MaskedEditText'
 }
 apply from: "${rootProject.projectDir}/scripts/publish-mavencentral.gradle"
 
 android {
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 33
+        minSdkVersion 23
+        targetSdkVersion 34
     }
     buildTypes {
         release {
@@ -43,7 +43,7 @@ android {
 
 ext {
     androidx_appcompat = '1.6.1'
-    androidx_core_ktx = '1.10.1'
+    androidx_core_ktx = '1.13.1'
 }
 
 dependencies {

@@ -100,7 +100,7 @@ open class MaskedWatcher(maskedFormatter: MaskedFormatter, editText: EditText) :
 
         formattedString?.let { setFormattedText(it) }
         oldFormattedValue = formattedString.toString()
-        afterTextChanged?.invoke(s)
+        afterTextChanged?.invoke(mEditText.get()?.text ?: s)
     }
 
     override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
