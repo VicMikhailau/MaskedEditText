@@ -98,8 +98,10 @@ open class MaskedWatcher(maskedFormatter: MaskedFormatter, editText: EditText) :
 
         val formattedString = mMaskFormatter.formatString(value)
 
-        formattedString?.let { setFormattedText(it) }
-        oldFormattedValue = formattedString.toString()
+        formattedString?.let {
+            setFormattedText(it)
+            oldFormattedValue = it.toString()
+        }
         afterTextChanged?.invoke(mEditText.get()?.text ?: s)
     }
 
