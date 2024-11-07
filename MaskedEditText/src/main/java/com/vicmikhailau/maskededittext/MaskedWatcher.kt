@@ -16,6 +16,10 @@ open class MaskedWatcher(maskedFormatter: MaskedFormatter, editText: EditText) :
     // Fields
     // ===========================================================
 
+    private var isProgrammaticChange = false
+
+    private var beforeSymbolsCount = 0
+
     private val mMaskFormatter: MaskedFormatter = maskedFormatter
     private val mEditText: WeakReference<EditText> = WeakReference(editText)
     private var oldFormattedValue = ""
@@ -31,19 +35,20 @@ open class MaskedWatcher(maskedFormatter: MaskedFormatter, editText: EditText) :
     // ===========================================================
 
     fun addTextChangedListener(
-            beforeTextChanged: ((
-                    text: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int
-            ) -> Unit)? = null,
-            onTextChanged: ((
-                    text: CharSequence?,
-                    start: Int,
-                    before: Int,
-                    count: Int
-            ) -> Unit)? = null,
-            afterTextChanged: ((text: Editable?) -> Unit)? = null) {
+        beforeTextChanged: ((
+            text: CharSequence?,
+            start: Int,
+            count: Int,
+            after: Int
+        ) -> Unit)? = null,
+        onTextChanged: ((
+            text: CharSequence?,
+            start: Int,
+            before: Int,
+            count: Int
+        ) -> Unit)? = null,
+        afterTextChanged: ((text: Editable?) -> Unit)? = null
+    ) {
         this.beforeTextChanged = beforeTextChanged
         this.onTextChanged = onTextChanged
         this.afterTextChanged = afterTextChanged
@@ -70,7 +75,7 @@ open class MaskedWatcher(maskedFormatter: MaskedFormatter, editText: EditText) :
             mMaskFormatter.mMask?.let { mask = it }
 
             var maskLength = 0
-            mMaskFormatter.maskLength?.let { maskLength = it}
+            mMaskFormatter.maskLength?.let { maskLength = it }
             newCursorPosition = 1.coerceAtLeast(newCursorPosition.coerceAtMost(maskLength))
 
 
@@ -87,10 +92,25 @@ open class MaskedWatcher(maskedFormatter: MaskedFormatter, editText: EditText) :
         if (s == null)
             return
 
+        val editText = mEditText.get()
+
+        val count = editText?.text?.count() ?: 0
+
+        if (beforeSymbolsCount > count) {
+            beforeSymbolsCount = count
+            return
+        }
+
+        beforeSymbolsCount = count
+
+        if (isProgrammaticChange) return
+
+        isProgrammaticChange = true
+
         var value = s.toString()
 
         var maskLength = 0
-        mMaskFormatter.maskLength?.let { maskLength = it}
+        mMaskFormatter.maskLength?.let { maskLength = it }
 
         if (value.length > oldFormattedValue.length && maskLength < value.length) {
             value = oldFormattedValue
@@ -103,6 +123,8 @@ open class MaskedWatcher(maskedFormatter: MaskedFormatter, editText: EditText) :
             oldFormattedValue = it.toString()
         }
         afterTextChanged?.invoke(mEditText.get()?.text ?: s)
+
+        isProgrammaticChange = false
     }
 
     override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
