@@ -16,8 +16,6 @@ open class MaskedWatcher(maskedFormatter: MaskedFormatter, editText: EditText) :
     // Fields
     // ===========================================================
 
-    private var beforeSymbolsCount = 0
-
     private val mMaskFormatter: MaskedFormatter = maskedFormatter
     private val mEditText: WeakReference<EditText> = WeakReference(editText)
     private var oldFormattedValue = ""
@@ -53,15 +51,6 @@ open class MaskedWatcher(maskedFormatter: MaskedFormatter, editText: EditText) :
 
     private fun setFormattedText(formattedString: IFormattedString) {
         val editText = mEditText.get() ?: return
-
-        val count = editText.text.count()
-
-        if (beforeSymbolsCount > count) {
-            beforeSymbolsCount = count
-            return
-        }
-
-        beforeSymbolsCount = count
 
         val deltaLength = formattedString.length - oldFormattedValue.length
 
