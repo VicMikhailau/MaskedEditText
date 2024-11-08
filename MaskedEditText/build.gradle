@@ -9,11 +9,11 @@ ext {
 apply from: "${rootProject.projectDir}/scripts/publish-mavencentral.gradle"
 
 android {
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         minSdkVersion 23
-        targetSdkVersion 34
+        targetSdkVersion 35
     }
     buildTypes {
         release {
@@ -42,13 +42,12 @@ android {
 
 
 ext {
-    androidx_appcompat = '1.6.1'
-    androidx_core_ktx = '1.13.1'
+    androidx_appcompat = '1.7.0'
+    androidx_core_ktx = '1.15.0'
 }
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
     implementation "androidx.appcompat:appcompat:$androidx_appcompat"
     implementation "androidx.core:core-ktx:$androidx_core_ktx"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
